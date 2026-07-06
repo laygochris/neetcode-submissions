@@ -1,0 +1,22 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+        res = nums[l]
+
+        while l <= r:
+            if nums[l] <= nums[r]:
+                res = min(res, nums[l])
+                break
+            
+            m = (l + r) // 2
+            res = min(res, nums[m])
+
+            # if mid is greater than the left, then we know
+            # that from l --> m the array is increasing =>
+            # minimum is not on left side
+            if nums[m] >= nums[l]:
+                l = m + 1
+            else:
+                r = m - 1
+            
+        return res
